@@ -1,10 +1,13 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MarsRoverTest {
     @Test
-    public void testNormalMovementOfRover() {
+    public void testNormalMovementOfRoverWithFileInput() {
         AInput input = new FileInput("input-onerover.txt");
         Game game = new Game(input);
         game.start();
@@ -13,7 +16,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testHitBoundary() {
+    public void testHitBoundaryWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-hitboundary.txt");
             Game game = new Game(input);
@@ -24,6 +27,23 @@ public class MarsRoverTest {
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testNormalMovementOfRoverWithKeyboardInput() {
+        String userInput = String.format("5 5%s1 2 N%sLMLMLMLMM%s",
+                System.lineSeparator(),
+                System.lineSeparator(),
+                System.lineSeparator());
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(bais);
+
+        AInput input = new KeyboardInput();
+        Game game = new Game(input);
+        game.start();
+        assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
+        System.setIn(sysInBackup);
     }
 
 //    @ParameterizedTest

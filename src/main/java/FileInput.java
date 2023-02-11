@@ -1,24 +1,23 @@
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class FileInput extends AInput {
-    private int plateauLength = 0;
-    private int plateauHeight = 0;
-
-    private List<Instruction> instructionList = new ArrayList<>();
-
     public FileInput(String filename) {
+        super();
         try {
             File inputFile = new File(filename);
             Scanner scanner = new Scanner(inputFile);
-            parsePlateauSize(scanner.nextLine());
+            parseSceneSize(scanner);
+
+            Instruction instruction;
 
             while (scanner.hasNextLine()) {
-                parseVehicleInstruction(scanner.nextLine(), scanner.nextLine());
+                instruction = parseInitialPosDirection(scanner);
+                instruction.setMovements(parseMovement(scanner));
+                instructionList.add(instruction);
             }
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -26,30 +25,34 @@ public class FileInput extends AInput {
         }
     }
 
-    private void parsePlateauSize(String plateauSize){
-        String[] strArray = plateauSize.split(" ");
-        if (strArray.length != 2) {
-            throw new IllegalArgumentException("Invalid plateau size.");
-        }
-        plateauLength = Integer.parseInt(strArray[0]);
-        plateauHeight = Integer.parseInt(strArray[1]);
-    }
-
-    private void parseVehicleInstruction(String initialPosAndDir, String action){
+    public Instruction parseInitialPosDirection(Scanner scanner) {
+        String initialPosAndDir = scanner.nextLine();
         String[] strArray = initialPosAndDir.split(" ");
         if (strArray.length != 3) {
             throw new IllegalArgumentException("Invalid vehicle initial position or initial direction.");
         }
         Point initialPos = new Point(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
         Direction direction = Direction.valueOf(strArray[2]);
-        char[] actionCharArr = action.toCharArray();
-        instructionList.add(new Instruction(initialPos, direction, actionCharArr));
+        return new Instruction(initialPos, direction);
     }
 
-    public Dimension getPlateauSize(){
-        return new Dimension(plateauLength,plateauHeight);
+    public char[] parseMovement(Scanner scanner) {
+        String action = scanner.nextLine();
+        return action.toCharArray();
     }
 
+    public void parseSceneSize(Scanner scanner){
+        String sceneSize = scanner.nextLine();
+        String[] strArray = sceneSize.split(" ");
+        if (strArray.length != 2) {
+            throw new IllegalArgumentException("Invalid plateau size.");
+        }
+        sceneDimension = new Dimension( Integer.parseInt(strArray[0]),Integer.parseInt(strArray[1]));
+    }
+
+    public Dimension getSceneSize(){
+        return sceneDimension;
+    }
     public List<Instruction> getVehicleInstruction(){
         return instructionList;
     }
