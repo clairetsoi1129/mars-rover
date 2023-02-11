@@ -7,10 +7,13 @@ public class AVehicle {
 
     protected char[] movements;
 
-    public AVehicle(Instruction instruction){
+    protected AScene scene;
+
+    public AVehicle(Instruction instruction, AScene scene){
         this.position = instruction.getInitialPosition();
         this.direction = instruction.getDirection();
         this.movements = instruction.getMovements();
+        this.scene = scene;
     }
 
     protected void move(int step){
@@ -19,6 +22,16 @@ public class AVehicle {
             case E -> position.translate(step, 0);
             case S -> position.translate(0, -step);
             case W -> position.translate(-step, 0);
+        }
+        if (scene.reachBoundary(position)){
+            // rollback the move
+            switch (direction) {
+                case N -> position.translate(0, -step);
+                case E -> position.translate(-step, 0);
+                case S -> position.translate(0, step);
+                case W -> position.translate(step, 0);
+            }
+            throw new IllegalArgumentException("Forbidden move. You will hit the boundary.");
         }
     }
 

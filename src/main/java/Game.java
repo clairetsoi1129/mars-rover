@@ -2,30 +2,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private List<Rover> rovers;
-    private Plateau plateau;
+    private List<AVehicle> rovers;
+    private AScene scene;
 
     public Game(AInput input) {
         List<Instruction> vehicleInstruction = input.getVehicleInstruction();
-        plateau = new Plateau(input.getPlateauSize());
+        scene = new Plateau(input.getPlateauSize());
 
         rovers = new ArrayList<>();
         for (Instruction instruction: vehicleInstruction){
-            rovers.add(new Rover(instruction));
+            rovers.add(new Rover(instruction, scene));
         }
     }
 
     public void start(){
-        for (Rover rover: rovers){
+        for (AVehicle rover: rovers){
             rover.start();
         }
     }
 
-    public List<Rover> getRovers() {
+    public List<AVehicle> getRovers() {
         return rovers;
     }
 
-    public Plateau getPlateau() {
-        return plateau;
+    public AScene getScene() {
+        return scene;
     }
 }

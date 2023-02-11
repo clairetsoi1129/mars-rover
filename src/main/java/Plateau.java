@@ -1,7 +1,7 @@
 import java.awt.*;
 
-public class Plateau {
+public class Plateau extends AScene {
     public Plateau(Dimension dimension){
-
+        super(dimension);
     }
 }

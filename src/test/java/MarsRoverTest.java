@@ -1,15 +1,29 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MarsRoverTest {
     @Test
-    public void testMovementOfRover() {
+    public void testNormalMovementOfRover() {
         AInput input = new FileInput("input-onerover.txt");
         Game game = new Game(input);
         game.start();
         assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
         assertEquals("5 1 E", game.getRovers().get(1).getPosDir());
+    }
+
+    @Test
+    public void testHitBoundary() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-hitboundary.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = "Forbidden move. You will hit the boundary.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
 //    @ParameterizedTest
