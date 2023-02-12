@@ -1,3 +1,8 @@
+package input;
+
+import model.Direction;
+import model.Instruction;
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;

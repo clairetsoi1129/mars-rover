@@ -12,7 +12,7 @@
 3. Implement logic by getting user input
 
 ## Future thoughts
-1. GUI
+1. input.GUI
 2. Collect Sample
 3. Support other vehicles
 4. Add obstacle

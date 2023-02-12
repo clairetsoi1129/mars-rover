@@ -1,3 +1,7 @@
+package input;
+
+import model.Instruction;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +26,4 @@ public abstract class AInput {
     public List<Instruction> getVehicleInstruction(){
         return instructionList;
     }
-
 }

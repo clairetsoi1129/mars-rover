@@ -1,3 +1,5 @@
+package model;
+
 import java.awt.*;
 
 public class AScene {
@@ -10,5 +12,9 @@ public class AScene {
     public boolean reachBoundary(Point position){
         return position.getX() > dimension.getWidth() || position.getY() > dimension.getHeight()
                 || position.getX() < 0 || position.getY() < 0;
+    }
+
+    public Dimension getDimension() {
+        return dimension;
     }
 }

@@ -1,7 +1,9 @@
-public class Event01 {
+package ui;
+
+public class EventHandler {
     GameManager gm;
 
-    public Event01(GameManager gm) {
+    public EventHandler(GameManager gm) {
         this.gm = gm;
     }
 

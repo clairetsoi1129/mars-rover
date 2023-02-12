@@ -1,13 +1,17 @@
+package ui;
+
+import input.GUI;
+
 public class GameManager {
     private GUI gui;
     private Game game;
 
     private ScreenChanger screenChanger;
-    private Event01 ev1;
+    private EventHandler evHandler;
 
     public GameManager() {
         gui = new GUI(this);
-        ev1 = new Event01(this);
+        evHandler = new EventHandler(this);
         screenChanger = new ScreenChanger(this);
         screenChanger.showScreen0();
     }
@@ -32,7 +36,7 @@ public class GameManager {
         return screenChanger;
     }
 
-    public Event01 getEv1() {
-        return ev1;
+    public EventHandler getEvHandler() {
+        return evHandler;
     }
 }

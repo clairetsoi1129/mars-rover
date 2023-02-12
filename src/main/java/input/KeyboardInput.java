@@ -1,3 +1,8 @@
+package input;
+
+import model.Direction;
+import model.Instruction;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +29,9 @@ public class KeyboardInput extends AInput{
 
     public void parseSceneSize(Scanner in){
         System.out.println("To start, please enter plateau size you want to explore.");
-        System.out.println("Plateau width (integer): ");
+        System.out.println("model.Plateau width (integer): ");
         int x=in.nextInt();
-        System.out.println("Plateau height (integer): ");
+        System.out.println("model.Plateau height (integer): ");
         int y=in.nextInt();
         sceneDimension = new Dimension(x,y);
     }
@@ -37,9 +42,9 @@ public class KeyboardInput extends AInput{
 
     private Point parseInitialPos(Scanner scanner){
         System.out.println("Please let me know where you want your rover to place at the start of the game.");
-        System.out.println("Rover initial position in integer, x: ");
+        System.out.println("model.Rover initial position in integer, x: ");
         int x=scanner.nextInt();
-        System.out.println("Rover initial position in integer, y: ");
+        System.out.println("model.Rover initial position in integer, y: ");
         int y=scanner.nextInt();
 //        scanner.nextLine(); //to consume the newline in previous in.nextInt() input
         return new Point(x,y);
@@ -48,7 +53,7 @@ public class KeyboardInput extends AInput{
     private Direction parseInitialDirection(Scanner scanner){
         Direction direction = null;
         while (direction == null) {
-            System.out.println("Rover initial facing direction (N,E,S,W): ");
+            System.out.println("model.Rover initial facing direction (N,E,S,W): ");
             System.out.println("N - North");
             System.out.println("E - East");
             System.out.println("S - South");

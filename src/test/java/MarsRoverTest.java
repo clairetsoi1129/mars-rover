@@ -1,4 +1,9 @@
+import input.AInput;
+import input.FileInput;
+import input.KeyboardInput;
 import org.junit.jupiter.api.Test;
+import ui.Game;
+import util.Message;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -23,7 +28,7 @@ public class MarsRoverTest {
             game.start();
         });
 
-        String expectedMessage = "Forbidden move. You will hit the boundary.";
+        String expectedMessage = Message.ERR_MSG_FORBIDDEN_MOVE;
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));

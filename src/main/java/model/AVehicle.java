@@ -1,3 +1,7 @@
+package model;
+
+import util.Message;
+
 import java.awt.*;
 import java.text.MessageFormat;
 
@@ -16,7 +20,7 @@ public class AVehicle {
         this.scene = scene;
     }
 
-    protected void move(int step){
+    public void move(int step){
         switch (direction) {
             case N -> position.translate(0, step);
             case E -> position.translate(step, 0);
@@ -31,11 +35,11 @@ public class AVehicle {
                 case S -> position.translate(0, step);
                 case W -> position.translate(step, 0);
             }
-            throw new IllegalArgumentException("Forbidden move. You will hit the boundary.");
+            throw new IllegalArgumentException(Message.ERR_MSG_FORBIDDEN_MOVE);
         }
     }
 
-    protected void turn(char dir){
+    public void turn(char dir){
         switch (direction){
             case N:
                 if (dir == Movement.L.asChar()) {
@@ -68,27 +72,27 @@ public class AVehicle {
         }
     }
 
-    protected void go(){
+    public void go(){
         for (char movement : movements) {
             go(movement);
         }
     }
 
-    protected void go(char movement){
+    private void go(char movement){
         if (movement == Movement.L.asChar() || movement == Movement.R.asChar()) {
             turn(movement);
         } else if (movement == Movement.M.asChar()) {
             move(1);
         } else {
-            throw new IllegalArgumentException("Instruction is wrong");
+            throw new IllegalArgumentException(Message.ERR_MSG_WRONG_INSTRUCTION);
         }
     }
 
-    protected Direction getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 
-    protected String getPosDir(){
+    public String getPosDir(){
         return MessageFormat.format("{0} {1} {2}",
                 (int)position.getX(), (int)position.getY(), getDirection());
     }

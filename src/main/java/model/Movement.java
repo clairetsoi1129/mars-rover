@@ -1,3 +1,5 @@
+package model;
+
 public enum Movement {
     L('L'),
     R('R'),

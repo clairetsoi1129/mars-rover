@@ -1,3 +1,9 @@
+package ui;
+
+import input.AInput;
+import input.KeyboardInput;
+import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +31,16 @@ public class Game {
         return rovers;
     }
 
+    public AScene getPlateau() {
+        return plateau;
+    }
+
     public static void main(String[] args){
         AInput input = new KeyboardInput();
         Game game = new Game(input);
         game.start();
         System.out.println("Final Destination:"+game.getRovers().get(0).getPosDir());
     }
+
+
 }
