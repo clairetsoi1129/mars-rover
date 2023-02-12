@@ -68,15 +68,19 @@ public class AVehicle {
         }
     }
 
-    protected void start(){
+    protected void go(){
         for (char movement : movements) {
-            if (movement == Movement.L.asChar() || movement == Movement.R.asChar()) {
-                turn(movement);
-            } else if (movement == Movement.M.asChar()) {
-                move(1);
-            } else {
-                throw new IllegalArgumentException("Instruction is wrong");
-            }
+            go(movement);
+        }
+    }
+
+    protected void go(char movement){
+        if (movement == Movement.L.asChar() || movement == Movement.R.asChar()) {
+            turn(movement);
+        } else if (movement == Movement.M.asChar()) {
+            move(1);
+        } else {
+            throw new IllegalArgumentException("Instruction is wrong");
         }
     }
 
@@ -87,5 +91,13 @@ public class AVehicle {
     protected String getPosDir(){
         return MessageFormat.format("{0} {1} {2}",
                 (int)position.getX(), (int)position.getY(), getDirection());
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setMovements(char[] movements) {
+        this.movements = movements;
     }
 }

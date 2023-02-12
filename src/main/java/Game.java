@@ -17,7 +17,7 @@ public class Game {
 
     public void start(){
         for (AVehicle rover: rovers){
-            rover.start();
+            rover.go();
         }
     }
 

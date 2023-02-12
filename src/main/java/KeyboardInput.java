@@ -53,7 +53,9 @@ public class KeyboardInput extends AInput{
             System.out.println("E - East");
             System.out.println("S - South");
             System.out.println("W - West");
-            direction = Direction.valueOf(scanner.nextLine().trim().toUpperCase());
+            String input = scanner.nextLine();
+//            input = scanner.nextLine(); //When run unit test, need to comment this
+            direction = Direction.valueOf(input.trim().toUpperCase());
         }
         return direction;
     }
