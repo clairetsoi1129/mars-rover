@@ -4,7 +4,6 @@ import java.awt.*;
 
 public class Instruction {
     private Point initialPosition;
-
     private Direction direction;
     private char[] movements;
 

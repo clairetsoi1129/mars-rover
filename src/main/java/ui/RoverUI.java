@@ -24,16 +24,13 @@ public class RoverUI {
     }
 
     private void initUI(){
-        System.out.println("createRover - start");
         Point roverPos = gui.translateRoverPos(rover.getPosition());
-        System.out.println("createRover - roverPos:[" + rover.getPosition() + "]");
         roverLabel = gui.createObject(1, roverPos.x, roverPos.y, String.format(ROVER_IMG, rover.getDirection()),
                 Message.MENU_NAMES,
                 Message.MENU_CMDS);
     }
 
     public void updateUI(){
-        System.out.println("updateRover - start");
         Point positionOnBoard = gui.translateRoverPos(rover.getPosition());
         String img = String.format(ROVER_IMG, rover.getDirection());
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(img)));

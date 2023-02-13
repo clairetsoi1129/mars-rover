@@ -8,9 +8,7 @@ import java.text.MessageFormat;
 public class AVehicle {
     protected Point position;
     protected Direction direction;
-
     protected char[] movements;
-
     protected AScene scene;
 
     public AVehicle(Instruction instruction, AScene scene){

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MarsRoverTest {
     @Test
     public void testNormalMovementOfRoverWithFileInput() {
-        AInput input = new FileInput("input-onerover.txt");
+        AInput input = new FileInput("input-normal.txt");
         Game game = new Game(input);
         game.start();
         assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
@@ -35,8 +35,79 @@ public class MarsRoverTest {
     }
 
     @Test
+    public void testDecimalSizeWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-decimal-size.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_SIZE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testWrongNoOfArgumentWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-wrong-no.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_SIZE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testDecimalLocationWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-decimal-location.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_POS_DIR;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testWrongDirectionWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-wrong-direction.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_POS_DIR;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testWrongInstructionWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-wrong-instruction.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_WRONG_INSTRUCTION;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     public void testNormalMovementOfRoverWithKeyboardInput() {
-        String userInput = String.format("5 5%s1 2 N%sLMLMLMLMM%s",
+        String userInput = String.format("5 5%s1 2%sN%sLMLMLMLMM%s",
+                System.lineSeparator(),
                 System.lineSeparator(),
                 System.lineSeparator(),
                 System.lineSeparator());
@@ -51,28 +122,123 @@ public class MarsRoverTest {
         System.setIn(sysInBackup);
     }
 
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
-//    void testValidCase(
-//            String input, int expected) {
-//        BowlingGame bowling = new BowlingGame(input);
-//        int actualValue = bowling.calculateFinalScore();
-//        assertEquals(expected, actualValue);
-//    }
-//
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/invalidData.csv", numLinesToSkip = 1)
-//    void testInvalidNumeralThrowException(
-//            String input) {
-//        Exception exception = assertThrows(IllegalArgumentException.class,
-//                () -> {
-//                    BowlingGame bowling = new BowlingGame(input);
-//                    bowling.calculateFinalScore();
-//                });
-//
-//        String expectedMessage = "Input is not valid.";
-//        String actualMessage = exception.getMessage();
-//
-//        assertTrue(actualMessage.contains(expectedMessage));
-//    }
+    @Test
+    public void testDecimalSizeWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("10.5 5.5%s1 2%sN%sLMLMLMLMM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_SIZE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testHitBoundaryWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("5 5%s0 0%sW%sM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_FORBIDDEN_MOVE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testDecimalLocationWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("5 5%s1.3 2%sN%sLMLMLMLMM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_POS;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testWrongDirectionWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("5 5%s1 2%sK%sLMLMLMLMM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_DIR;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testWrongInstructionWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("5 5%s1 2%sN%sPMLMLMLMM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_WRONG_INSTRUCTION;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

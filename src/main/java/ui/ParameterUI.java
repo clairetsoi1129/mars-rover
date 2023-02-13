@@ -24,6 +24,9 @@ public class ParameterUI {
 
     private final String ARROW_IMG = "img/arrow50x50.png";
 
+    private final String CMD_GO_SCENES_1 = "goScene1";
+    private final String CMD_GO_SCENES_0 = "goScene0";
+
     public ParameterUI(GUI gui) {
         this.gui = gui;
         initUI();
@@ -36,9 +39,9 @@ public class ParameterUI {
     }
 
     private void initPlateauSizeUI(){
-        int labelWidth = 200;
+        int labelWidth = 300;
         int labelHeight = 50;
-        int labelX = 200;
+        int labelX = 100;
         int labelY = 100;
         int textFieldWidth = 50;
         int textFieldX = labelX + labelWidth;
@@ -46,8 +49,8 @@ public class ParameterUI {
         JPanel panel = gui.getBgPanel()[0];
 
         JLabel plateauSizeLabel = new JLabel();
-        plateauSizeLabel.setText(Message.MSG_ASK_PLATEAU_SIZE);
-        plateauSizeLabel.setForeground(Color.LIGHT_GRAY);
+        plateauSizeLabel.setText(Message.MSG_GET_PLATEAU_SIZE_GUI);
+        plateauSizeLabel.setForeground(Color.WHITE);
         plateauSizeLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
 
         widthText = new JFormattedTextField();
@@ -61,26 +64,29 @@ public class ParameterUI {
     }
 
     private void initRoverPosUI(){
-        int labelWidth = 200;
+        int labelWidth = 300;
         int labelHeight = 50;
-        int labelX = 200;
+        int labelX = 100;
         int labelY = 200;
         int textFieldWidth = 50;
         int textFieldX = 400;
+        int textFieldY = labelY;
         JPanel panel = gui.getBgPanel()[0];
 
-        JLabel roverPosLabel = new JLabel("model.Rover position (x, y):");
+        JLabel roverPosLabel = new JLabel(Message.MSG_INIT_POS_X_Y_GUI);
         roverPosLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
+        roverPosLabel.setForeground(Color.WHITE);
 
-        JLabel roverDirLabel = new JLabel("model.Rover direction (N, E, S, W):");
+        JLabel roverDirLabel = new JLabel(Message.MSG_INIT_DIR);
         roverDirLabel.setBounds(labelX, labelY + 50, labelWidth, labelHeight);
+        roverDirLabel.setForeground(Color.WHITE);
 
         roverXText = new JFormattedTextField();
         roverYText = new JFormattedTextField();
         roverDirText = new JFormattedTextField();
-        roverXText.setBounds(textFieldX, labelY, textFieldWidth, labelHeight);
-        roverYText.setBounds(textFieldX + 50, labelY, textFieldWidth, labelHeight);
-        roverDirText.setBounds(textFieldX, labelY + 50, textFieldWidth, labelHeight);
+        roverXText.setBounds(textFieldX, textFieldY, textFieldWidth, labelHeight);
+        roverYText.setBounds(textFieldX + 50, textFieldY, textFieldWidth, labelHeight);
+        roverDirText.setBounds(textFieldX, textFieldY+50, textFieldWidth, labelHeight);
 
         panel.add(roverPosLabel);
         panel.add(roverDirLabel);
@@ -90,7 +96,7 @@ public class ParameterUI {
     }
 
     private void initContinueButton(){
-        initButton("goScene1");
+        initButton(CMD_GO_SCENES_1);
     }
 
     private void initButton(String cmd){
@@ -105,34 +111,55 @@ public class ParameterUI {
         arrowButton.setIcon(arrowIcon);
         arrowButton.addActionListener(ev -> {
             switch (cmd) {
-                case "goScene1" -> {
-                    gui.setSceneDimension(getPlateauSize());
-                    List<Instruction> instructionList = new ArrayList<>();
-                    instructionList.add(new Instruction(getRoverInitialPos(), getRoverInitialDirection()));
-                    gui.setInstructionList(instructionList);
-                    gui.initGameBoardComponents();
-                    gui.getGm().getScreenChanger().showScreen1();
+                case CMD_GO_SCENES_1 -> {
+                    Dimension dim = getPlateauSize();
+                    Point pos = getRoverInitialPos();
+                    Direction dir = getRoverInitialDirection();
+
+                    if (dim != null && pos != null && dir != null) {
+                        gui.setSceneDimension(dim);
+                        List<Instruction> instructionList = new ArrayList<>();
+                        instructionList.add(new Instruction(pos, dir));
+                        gui.setInstructionList(instructionList);
+                        gui.initGameBoardComponents();
+                        gui.getGm().getScreenChanger().showScreen1();
+                    }
                 }
-                case "goScene0" -> gui.getGm().getScreenChanger().showScreen0();
+                case CMD_GO_SCENES_0 -> gui.getGm().getScreenChanger().showScreen0();
                 default -> {
                 }
             }
         });
-        arrowButton.setActionCommand("goScene1");
+        arrowButton.setActionCommand(CMD_GO_SCENES_1);
         arrowButton.setBorderPainted(false);
         panel.add(arrowButton);
     }
 
     public Dimension getPlateauSize(){
-        return new Dimension(Integer.parseInt(widthText.getText()),
-                Integer.parseInt(heightText.getText()));
+        try {
+            return new Dimension(Integer.parseInt(widthText.getText()),
+                    Integer.parseInt(heightText.getText()));
+        }catch (NumberFormatException e){
+            gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE);
+        }
+        return null;
     }
 
     public Point getRoverInitialPos(){
-        return new Point(Integer.parseInt(roverXText.getText()), Integer.parseInt(roverYText.getText()));
+        try {
+            return new Point(Integer.parseInt(roverXText.getText()), Integer.parseInt(roverYText.getText()));
+        }catch (NumberFormatException e){
+            gui.getMessageText().setText(Message.ERR_MSG_INVALID_POS);
+        }
+        return null;
     }
 
     public Direction getRoverInitialDirection(){
-        return Direction.valueOf(roverDirText.getText().trim().toUpperCase());
+        try {
+            return Direction.valueOf(roverDirText.getText().trim().toUpperCase());
+        }catch (IllegalArgumentException e){
+            gui.getMessageText().setText(Message.ERR_MSG_INVALID_DIR);
+        }
+        return null;
     }
 }

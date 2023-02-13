@@ -41,6 +41,4 @@ public class Game {
         game.start();
         System.out.println("Final Destination:"+game.getRovers().get(0).getPosDir());
     }
-
-
 }

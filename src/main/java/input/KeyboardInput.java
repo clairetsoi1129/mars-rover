@@ -2,9 +2,11 @@ package input;
 
 import model.Direction;
 import model.Instruction;
+import util.Message;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,17 +25,26 @@ public class KeyboardInput extends AInput{
     }
 
     private void printWelcomeMessage(){
-        System.out.println("Welcome to Melody Mars Mission!!");
-        System.out.println("You will move rovers around the surface of Mars!");
+        System.out.println(Message.TITLE);
+        System.out.println(Message.WELCOME_MSG);
     }
 
     public void parseSceneSize(Scanner in){
-        System.out.println("To start, please enter plateau size you want to explore.");
-        System.out.println("model.Plateau width (integer): ");
-        int x=in.nextInt();
-        System.out.println("model.Plateau height (integer): ");
-        int y=in.nextInt();
-        sceneDimension = new Dimension(x,y);
+        int x = 0;
+        int y = 0;
+
+        System.out.println(Message.MSG_GET_PLATEAU_SIZE);
+        System.out.println(Message.MSG_PLATEAU_WIDTH);
+
+        try {
+            x = in.nextInt();
+            System.out.println(Message.MSG_PLATEAU_HEIGHT);
+            y = in.nextInt();
+        }catch (InputMismatchException e) {
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
+        }
+
+        sceneDimension = new Dimension(x, y);
     }
 
     public Instruction parseInitialPosDirection(Scanner scanner) {
@@ -41,36 +52,38 @@ public class KeyboardInput extends AInput{
     }
 
     private Point parseInitialPos(Scanner scanner){
-        System.out.println("Please let me know where you want your rover to place at the start of the game.");
-        System.out.println("model.Rover initial position in integer, x: ");
-        int x=scanner.nextInt();
-        System.out.println("model.Rover initial position in integer, y: ");
-        int y=scanner.nextInt();
-//        scanner.nextLine(); //to consume the newline in previous in.nextInt() input
+        int x = 0;
+        int y = 0;
+
+        try {
+            System.out.println(Message.MSG_GET_INIT_POS);
+            System.out.println(Message.MSG_INIT_POS_X);
+
+            x = scanner.nextInt();
+            System.out.println(Message.MSG_INIT_POS_Y);
+            y = scanner.nextInt();
+            scanner.nextLine(); //to consume the newline in previous in.nextInt() input
+        }catch (InputMismatchException e) {
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS);
+        }
         return new Point(x,y);
     }
 
     private Direction parseInitialDirection(Scanner scanner){
         Direction direction = null;
-        while (direction == null) {
-            System.out.println("model.Rover initial facing direction (N,E,S,W): ");
-            System.out.println("N - North");
-            System.out.println("E - East");
-            System.out.println("S - South");
-            System.out.println("W - West");
+        try {
+            System.out.println(Message.MSG_INIT_DIR);
             String input = scanner.nextLine();
-//            input = scanner.nextLine(); //When run unit test, need to comment this
             direction = Direction.valueOf(input.trim().toUpperCase());
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_DIR);
         }
         return direction;
     }
 
     public char[] parseMovement(Scanner scanner){
-        System.out.println("Setup complete. You can control the rover now.");
-        System.out.println("How do you want to move. Put your instruction in one line. (eg. LMRMMM): ");
-        System.out.println("L - Turn Left 90 degree");
-        System.out.println("R - Turn Right 90 degree");
-        System.out.println("M - Move 1 step forward");
+        System.out.println(Message.MSG_SETUP_DONE);
+        System.out.println(Message.MSG_GET_INSTRUCTION);
         String movement = scanner.nextLine();
         return movement.toCharArray();
     }

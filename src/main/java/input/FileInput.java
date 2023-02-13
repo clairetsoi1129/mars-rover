@@ -2,6 +2,7 @@ package input;
 
 import model.Direction;
 import model.Instruction;
+import util.Message;
 
 import java.awt.*;
 import java.io.File;
@@ -34,10 +35,19 @@ public class FileInput extends AInput {
         String initialPosAndDir = scanner.nextLine();
         String[] strArray = initialPosAndDir.split(" ");
         if (strArray.length != 3) {
-            throw new IllegalArgumentException("Invalid vehicle initial position or initial direction.");
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         }
-        Point initialPos = new Point(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
-        Direction direction = Direction.valueOf(strArray[2]);
+
+        Point initialPos = null;
+        Direction direction = null;
+        try {
+            initialPos = new Point(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
+            direction = Direction.valueOf(strArray[2]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
+        }
         return new Instruction(initialPos, direction);
     }
 
@@ -46,19 +56,25 @@ public class FileInput extends AInput {
         return action.toCharArray();
     }
 
-    public void parseSceneSize(Scanner scanner){
+    public void parseSceneSize(Scanner scanner) {
         String sceneSize = scanner.nextLine();
         String[] strArray = sceneSize.split(" ");
         if (strArray.length != 2) {
-            throw new IllegalArgumentException("Invalid plateau size.");
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
         }
-        sceneDimension = new Dimension( Integer.parseInt(strArray[0]),Integer.parseInt(strArray[1]));
+
+        try {
+            sceneDimension = new Dimension(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
+        }
     }
 
-    public Dimension getSceneSize(){
+    public Dimension getSceneSize() {
         return sceneDimension;
     }
-    public List<Instruction> getVehicleInstruction(){
+
+    public List<Instruction> getVehicleInstruction() {
         return instructionList;
     }
 }

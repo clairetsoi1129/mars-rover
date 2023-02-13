@@ -152,7 +152,6 @@ public class GUI extends AInput {
     private void initMainBoard() {
         createBackground(0, BG_IMG);
         parameterUI = new ParameterUI(this);
-//        createArrowButton(0, 0, 150, 50, 50, ARROW_IMG, "goScene1");
         bgPanel[0].add(bgLabel[0]);
     }
 
@@ -195,34 +194,6 @@ public class GUI extends AInput {
         return new Point((WIN_WIDTH / 2 - (dim.width) * CELL_WIDTH / 2 + x * CELL_WIDTH),
                 (WIN_HEIGHT - TEXT_AREA_HEIGHT) / 2 + (dim.height) * CELL_HEIGHT / 2 - (dim.height - y) * CELL_HEIGHT);
     }
-
-//    public void createArrowButton(int bgNum, int x, int y, int width, int height, String img, String cmd) {
-//        ImageIcon arrowIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(img)));
-//        JButton arrowButton = new JButton();
-//        arrowButton.setBounds(x, y, width, height);
-//        arrowButton.setBackground(null);
-//        arrowButton.setContentAreaFilled(false);
-//        arrowButton.setFocusPainted(false);
-//        arrowButton.setIcon(arrowIcon);
-//        arrowButton.addActionListener(ev -> {
-//            switch (cmd) {
-//                case "goScene1" -> {
-//                    sceneDimension = parameterUI.getPlateauSize();
-//                    instructionList.add(new Instruction(parameterUI.getRoverInitialPos(), parameterUI.getRoverInitialDirection()));
-//                    initGameBoardComponents();
-//                    gm.getScreenChanger().showScreen1();
-//                }
-//                case "goScene0" -> gm.getScreenChanger().showScreen0();
-//                default -> {
-//                }
-//            }
-//        });
-//        arrowButton.setActionCommand(cmd);
-//        arrowButton.setBorderPainted(false);
-//        bgPanel[bgNum].add(arrowButton);
-//    }
-
-
 
     public JTextArea getMessageText() {
         return messageText;
