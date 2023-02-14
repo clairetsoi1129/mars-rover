@@ -1,5 +1,6 @@
 package model;
 
+import ui.Game;
 import util.Message;
 
 import java.awt.*;
@@ -9,13 +10,13 @@ public class AVehicle {
     protected Point position;
     protected Direction direction;
     protected char[] movements;
-    protected AScene scene;
+    protected Game game;
 
-    public AVehicle(Instruction instruction, AScene scene){
+    public AVehicle(Instruction instruction, Game game){
         this.position = instruction.getInitialPosition();
         this.direction = instruction.getDirection();
         this.movements = instruction.getMovements();
-        this.scene = scene;
+        this.game = game;
     }
 
     public void move(int step){
@@ -25,7 +26,7 @@ public class AVehicle {
             case S -> position.translate(0, -step);
             case W -> position.translate(-step, 0);
         }
-        if (scene.reachBoundary(position)){
+        if (game.getPlateau().reachBoundary(position)){
             // rollback the move
             rollback(1);
             throw new IllegalArgumentException(Message.ERR_MSG_FORBIDDEN_MOVE);

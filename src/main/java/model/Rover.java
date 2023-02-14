@@ -1,5 +1,6 @@
 package model;
 
+import ui.Game;
 import util.Message;
 
 import java.util.ArrayList;
@@ -7,8 +8,8 @@ import java.util.List;
 
 public class Rover extends AVehicle{
     private List<Sample> basket;
-    public Rover(Instruction instruction, AScene scene){
-        super(instruction, scene);
+    public Rover(Instruction instruction, Game game){
+        super(instruction, game);
         basket = new ArrayList<>();
     }
 
@@ -23,16 +24,16 @@ public class Rover extends AVehicle{
             case S -> position.translate(0, -step);
             case W -> position.translate(-step, 0);
         }
-        if (scene.reachBoundary(position)){
+        if (game.getPlateau().reachBoundary(position)){
             rollback(1);
             throw new IllegalArgumentException(Message.ERR_MSG_FORBIDDEN_MOVE);
         }
-        if (((Plateau)scene).hasObstacle(position)){
+        if (((Plateau)game.getPlateau()).hasObstacle(position)){
             // rollback the move
             rollback(1);
             throw new IllegalArgumentException(Message.ERR_MSG_HAS_OBSTACLE);
         }
-        Sample sample = ((Plateau)scene).digSample(position);
+        Sample sample = ((Plateau)game.getPlateau()).digSample(position);
         if (sample != null){
             collect(sample);
         }

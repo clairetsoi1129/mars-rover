@@ -1,5 +1,6 @@
 package model;
 
+import ui.Game;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,24 +8,35 @@ import java.util.List;
 public class Plateau extends AScene {
     private List<Sample> samples;
     private List<Obstacle> obstacles;
+    private int noOfSample;
+    private int noOfObstacle;
 
-    public Plateau(Dimension dimension){
-        super(dimension);
+    public Plateau(Dimension dimension, Game game){
+        super(dimension, game);
+
+        noOfSample = dimension.width*dimension.height/10;
+        noOfObstacle = dimension.width*dimension.height/10;
+        game.getRandom().generateLocationAvoidConflict(noOfSample + noOfObstacle);
         generateSample();
         generateObstacle();
     }
 
     private void generateSample(){
         samples = new ArrayList<>();
-        samples.add(new Sample(new Point(2,5)));
-        samples.add(new Sample(new Point(1,3)));
+
+        for (int i=0; i < noOfSample; i++){
+            Sample sample = new Sample(game.getRandom().getGeneratedLocation(i));
+            samples.add(sample);
+        }
     }
 
     private void generateObstacle(){
         obstacles = new ArrayList<>();
-        obstacles.add(new Obstacle(new Point(2,2)));
-        obstacles.add(new Obstacle(new Point(3,3)));
-        obstacles.add(new Obstacle(new Point(4,4)));
+
+        for (int i=0; i < noOfObstacle; i++){
+            Obstacle obstacle = new Obstacle(game.getRandom().getGeneratedLocation(i+noOfSample));
+            obstacles.add(obstacle);
+        }
     }
 
     public boolean hasObstacle(Point roverPosition){
@@ -32,6 +44,7 @@ public class Plateau extends AScene {
         for (Obstacle obstacle : obstacles) {
             if (roverPosition.equals(obstacle.getLocation())) {
                 hasObstacle = true;
+                break;
             }
         }
         return hasObstacle;

@@ -1,30 +1,58 @@
 import input.AInput;
 import input.FileInput;
 import input.KeyboardInput;
+import model.Rover;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ui.Game;
 import util.Message;
+import util.RandomLocation;
 
+import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.lenient;
 
+@ExtendWith(MockitoExtension.class)
 public class MarsRoverTest {
+    @Mock
+    RandomLocation random;
+
+    private List<Point> pointList;
+
+    @BeforeEach
+    void init() {
+        random = Mockito.mock(RandomLocation.class);
+
+        lenient().when(random.getGeneratedLocation(0)).thenReturn(new Point(1,1));
+        lenient().when(random.getGeneratedLocation(1)).thenReturn(new Point(2,2));
+        lenient().when(random.getGeneratedLocation(2)).thenReturn(new Point(3,2));
+        lenient().when(random.getGeneratedLocation(3)).thenReturn(new Point(4,4));
+    }
+
     @Test
     public void testNormalMovementOfRoverWithFileInput() {
         AInput input = new FileInput("input-normal.txt");
-        Game game = new Game(input);
+        Game game = new Game(input, random);
         game.start();
         assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
+        assertEquals(1, ((Rover)game.getRovers().get(0)).getBasket().size());
         assertEquals("5 1 E", game.getRovers().get(1).getPosDir());
+        assertEquals(0, ((Rover)game.getRovers().get(1)).getBasket().size());
     }
 
     @Test
     public void testHitBoundaryWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-hitboundary.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -38,7 +66,7 @@ public class MarsRoverTest {
     public void testHitObstacleWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-obstacle.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -52,7 +80,7 @@ public class MarsRoverTest {
     public void testDecimalSizeWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-decimal-size.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -66,7 +94,7 @@ public class MarsRoverTest {
     public void testWrongNoOfArgumentWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-wrong-no.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -80,7 +108,7 @@ public class MarsRoverTest {
     public void testInitPosOutsideWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-pos-outside.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -94,7 +122,7 @@ public class MarsRoverTest {
     public void testDecimalLocationWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-decimal-location.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -108,7 +136,7 @@ public class MarsRoverTest {
     public void testWrongDirectionWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-wrong-direction.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -122,7 +150,7 @@ public class MarsRoverTest {
     public void testWrongInstructionWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-wrong-instruction.txt");
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
         });
 
@@ -144,9 +172,11 @@ public class MarsRoverTest {
         System.setIn(bais);
 
         AInput input = new KeyboardInput();
-        Game game = new Game(input);
+        Game game = new Game(input, random);
         game.start();
         assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
+
+        assertEquals(1, ((Rover)game.getRovers().get(0)).getBasket().size());
         System.setIn(sysInBackup);
     }
 
@@ -163,7 +193,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
@@ -187,7 +217,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
@@ -211,7 +241,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
@@ -235,7 +265,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
@@ -259,7 +289,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
@@ -283,7 +313,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
@@ -297,7 +327,7 @@ public class MarsRoverTest {
     @Test
     public void testHitObstacleWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            String userInput = String.format("5 5%s1 2%sE%sM%s",
+            String userInput = String.format("5 5%s1 2%sE%sMM%s",
                     System.lineSeparator(),
                     System.lineSeparator(),
                     System.lineSeparator(),
@@ -307,7 +337,7 @@ public class MarsRoverTest {
             System.setIn(bais);
 
             AInput input = new KeyboardInput();
-            Game game = new Game(input);
+            Game game = new Game(input, random);
             game.start();
             System.setIn(sysInBackup);
         });
