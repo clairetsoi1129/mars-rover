@@ -1,6 +1,7 @@
-package ui;
+package controller;
 
-import input.GUI;
+import view.GUI;
+import view.ScreenChanger;
 
 public class GameManager {
     private GUI gui;

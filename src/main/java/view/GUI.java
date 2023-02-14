@@ -1,10 +1,9 @@
-package input;
+package view;
 
+import controller.AInput;
+import controller.GameManager;
+import controller.GuiInput;
 import model.Instruction;
-import ui.GameManager;
-import ui.ParameterUI;
-import ui.PlateauUI;
-import ui.RoverUI;
 import util.Message;
 
 import javax.swing.*;
@@ -45,7 +44,7 @@ public class GUI extends AInput {
     private RoverUI roverUI;
     private PlateauUI plateauUI;
 
-    private ParameterUI parameterUI;
+    private GuiInput parameterUI;
 
     public GUI(GameManager gm) {
         super();
@@ -161,7 +160,7 @@ public class GUI extends AInput {
 
     private void initMainBoard() {
         createBackground(0, BG_IMG);
-        parameterUI = new ParameterUI(this);
+        parameterUI = new GuiInput(this);
         bgPanel[0].add(bgLabel[0]);
     }
 
@@ -188,14 +187,14 @@ public class GUI extends AInput {
         }
     }
 
-    public Point translateRoverPos(int x, int y) {
+    public Point translateObjectPos(int x, int y) {
         Dimension dim = sceneDimension;
         Point pos = getGridPos(x, dim.height - y - 1);
         return new Point(pos.x-CELL_WIDTH/2, pos.y+CELL_HEIGHT/2);
     }
 
-    public Point translateRoverPos(Point point) {
-        return translateRoverPos(point.x, point.y);
+    public Point translateObjectPos(Point point) {
+        return translateObjectPos(point.x, point.y);
     }
 
     public Point getGridPos(int x, int y) {

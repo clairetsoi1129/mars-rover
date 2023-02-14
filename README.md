@@ -9,12 +9,12 @@
 ![class diagram](mars-rovers.drawio.png)
 
 ## Key Feature:
-The program support 3 types of user input, i.e.
-File input, Keyboard input, GUI input.
-Only file input flow support multiple rovers. Keyboard/GUI input support one rover only.
+The program support 3 types of user controller, i.e.
+File controller, Keyboard controller, GUI controller.
+Only file controller flow support multiple rovers. Keyboard/GUI controller support one rover only.
 
 ## Assumptions
-File input:
+File controller:
 
 1. There will be 1 row at the top to indicate the screen size.
 2. And then 1 row for specifying each rover init location and direction. 
@@ -27,16 +27,16 @@ Init location x, y are integers and should be within the plateau. And direction 
 8. If the rover enter the box with samples, rover will collect the samples, the count will be shown.
 
 For Keyboard Input:
-1. First, the text ui will ask for plateau width and height. They must be integers. 
-2. Second, the text ui will ask for rover initial position. They must be integers too and should be within the plateau.
-3. Thirdly, the text ui will ask for rover initial direction. Direction must be N,E,S,W.
-4. If any of the above input not valid, the program will halt. 
+1. First, the text view will ask for plateau width and height. They must be integers. 
+2. Second, the text view will ask for rover initial position. They must be integers too and should be within the plateau.
+3. Thirdly, the text view will ask for rover initial direction. Direction must be N,E,S,W.
+4. If any of the above controller not valid, the program will halt. 
 5. The program will calculate the final location of rover and display.
 6. If the rover hit the boundary, the program will throw exception and halt.
 7. If the rover hit the obstacles, the program will throw exception and halt.
 8. If the rover enter the box with samples, rover will collect the samples, the count will be shown.
 
-For GUI input:
+For GUI controller:
 Since the screen is limited to 800x500, the plateau size can only support up to 15x9.
 1. First screen show a parameter request form to ask for plateau size and initial position / direction of rover.
 2. Validation of plateau size are 15x9.  
@@ -50,9 +50,9 @@ Since the screen is limited to 800x500, the plateau size can only support up to 
 ## Approaches
 1. Implement simple logic by getting Input from files
 2. Add boundary check
-3. Implement logic by getting user input
+3. Implement logic by getting user controller
 4. Implement GUI in swing
-5. Validate user input
+5. Validate user controller
 6. Add obstacle to block the way of rover
 7. Add sample for rover to collect
 

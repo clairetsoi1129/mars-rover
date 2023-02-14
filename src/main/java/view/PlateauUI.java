@@ -1,6 +1,5 @@
-package ui;
+package view;
 
-import input.GUI;
 import model.AScene;
 import model.Obstacle;
 import model.Plateau;
@@ -41,7 +40,7 @@ public class PlateauUI {
     }
 
     private void initObstacleUI(){
-        obstacleUIs = new ArrayList<ObstacleUI>();
+        obstacleUIs = new ArrayList<>();
         List<Obstacle> obstacles = ((Plateau)plateau).getObstacles();
         for (Obstacle obstacle : obstacles) {
             obstacleUIs.add(new ObstacleUI(obstacle, gui));

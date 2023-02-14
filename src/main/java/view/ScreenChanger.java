@@ -1,4 +1,6 @@
-package ui;
+package view;
+
+import controller.GameManager;
 
 public class ScreenChanger {
     GameManager gm;

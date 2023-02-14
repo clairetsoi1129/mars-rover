@@ -1,4 +1,4 @@
-package input;
+package controller;
 
 import model.Direction;
 import model.Instruction;
@@ -30,8 +30,8 @@ public class KeyboardInput extends AInput{
     }
 
     public void parseSceneSize(Scanner in){
-        int x = 0;
-        int y = 0;
+        int x;
+        int y;
 
         System.out.println(Message.MSG_GET_PLATEAU_SIZE);
         System.out.println(Message.MSG_PLATEAU_WIDTH);
@@ -52,8 +52,8 @@ public class KeyboardInput extends AInput{
     }
 
     private Point parseInitialPos(Scanner scanner){
-        int x = 0;
-        int y = 0;
+        int x;
+        int y;
 
         try {
             System.out.println(Message.MSG_GET_INIT_POS);
@@ -73,7 +73,7 @@ public class KeyboardInput extends AInput{
     }
 
     private Direction parseInitialDirection(Scanner scanner){
-        Direction direction = null;
+        Direction direction;
         try {
             System.out.println(Message.MSG_INIT_DIR);
             String input = scanner.nextLine();

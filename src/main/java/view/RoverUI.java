@@ -1,6 +1,5 @@
-package ui;
+package view;
 
-import input.GUI;
 import model.AVehicle;
 import model.Rover;
 import util.Message;
@@ -26,14 +25,14 @@ public class RoverUI {
     }
 
     private void initUI(){
-        Point roverPos = gui.translateRoverPos(rover.getPosition());
+        Point roverPos = gui.translateObjectPos(rover.getPosition());
         roverLabel = gui.createObject(1, roverPos.x, roverPos.y, String.format(ROVER_IMG, rover.getDirection()),
                 Message.MENU_NAMES,
                 Message.MENU_CMDS);
     }
 
     public void updateUI(){
-        Point positionOnBoard = gui.translateRoverPos(rover.getPosition());
+        Point positionOnBoard = gui.translateObjectPos(rover.getPosition());
         String img = String.format(ROVER_IMG, rover.getDirection());
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(img)));
         roverLabel.setIcon(icon);

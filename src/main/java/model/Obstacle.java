@@ -2,7 +2,7 @@ package model;
 
 import java.awt.*;
 
-public class Obstacle implements IComponent{
+public class Obstacle implements Component {
     private Point location;
 
     public Obstacle(Point location) {

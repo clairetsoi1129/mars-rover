@@ -2,7 +2,7 @@ package model;
 
 import java.awt.*;
 
-public class Sample implements IComponent{
+public class Sample implements Component {
     private Point location;
     private boolean isDigged;
 

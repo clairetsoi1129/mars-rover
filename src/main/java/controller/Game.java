@@ -1,7 +1,5 @@
-package ui;
+package controller;
 
-import input.AInput;
-import input.KeyboardInput;
 import model.*;
 import util.RandomLocation;
 import util.RandomLocationImpl;

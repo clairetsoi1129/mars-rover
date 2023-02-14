@@ -1,4 +1,4 @@
-package input;
+package controller;
 
 import model.Direction;
 import model.Instruction;
@@ -38,10 +38,10 @@ public class FileInput extends AInput {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         }
 
-        Point initialPos = null;
-        Direction direction = null;
-        int x = 0;
-        int y = 0;
+        Point initialPos;
+        Direction direction;
+        int x;
+        int y;
         try {
             x = Integer.parseInt(strArray[0]);
             y = Integer.parseInt(strArray[1]);

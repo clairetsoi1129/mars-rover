@@ -1,9 +1,9 @@
-package ui;
+package controller;
 
-import input.GUI;
 import model.Direction;
 import model.Instruction;
 import util.Message;
+import view.GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ParameterUI {
+public class GuiInput {
     private GUI gui;
     private JFormattedTextField widthText;
     private JFormattedTextField heightText;
@@ -27,7 +27,7 @@ public class ParameterUI {
     private final String CMD_GO_SCENES_1 = "goScene1";
     private final String CMD_GO_SCENES_0 = "goScene0";
 
-    public ParameterUI(GUI gui) {
+    public GuiInput(GUI gui) {
         this.gui = gui;
         initUI();
     }

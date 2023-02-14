@@ -1,6 +1,6 @@
 package model;
 
-import ui.Game;
+import controller.Game;
 import util.Message;
 
 import java.util.ArrayList;

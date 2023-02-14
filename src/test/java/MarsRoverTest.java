@@ -1,6 +1,6 @@
-import input.AInput;
-import input.FileInput;
-import input.KeyboardInput;
+import controller.AInput;
+import controller.FileInput;
+import controller.KeyboardInput;
 import model.Rover;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,14 +8,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ui.Game;
+import controller.Game;
 import util.Message;
 import util.RandomLocation;
 
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
@@ -24,8 +23,6 @@ import static org.mockito.Mockito.lenient;
 public class MarsRoverTest {
     @Mock
     RandomLocation random;
-
-    private List<Point> pointList;
 
     @BeforeEach
     void init() {

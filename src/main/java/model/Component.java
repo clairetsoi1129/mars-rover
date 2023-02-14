@@ -2,6 +2,6 @@ package model;
 
 import java.awt.*;
 
-public interface IComponent {
+public interface Component {
     Point getLocation();
 }
