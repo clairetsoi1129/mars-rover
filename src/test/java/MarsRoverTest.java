@@ -35,6 +35,20 @@ public class MarsRoverTest {
     }
 
     @Test
+    public void testHitObstacleWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-obstacle.txt");
+            Game game = new Game(input);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_HAS_OBSTACLE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     public void testDecimalSizeWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-decimal-size.txt");
@@ -275,6 +289,30 @@ public class MarsRoverTest {
         });
 
         String expectedMessage = Message.ERR_MSG_INVALID_POS_OUTSIDE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testHitObstacleWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("5 5%s1 2%sE%sM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_HAS_OBSTACLE;
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));

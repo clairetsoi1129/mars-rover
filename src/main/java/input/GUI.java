@@ -149,6 +149,16 @@ public class GUI extends AInput {
 
     }
 
+    public JLabel createObject(int bgNum, int objX, int objY, String objImg) {
+        JLabel objectLabel = new JLabel();
+        objectLabel.setBounds(objX, objY, CELL_WIDTH, CELL_HEIGHT);
+        ImageIcon objectIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(objImg)));
+        objectLabel.setIcon(objectIcon);
+
+        bgPanel[bgNum].add(objectLabel);
+        return objectLabel;
+    }
+
     private void initMainBoard() {
         createBackground(0, BG_IMG);
         parameterUI = new ParameterUI(this);
@@ -171,11 +181,10 @@ public class GUI extends AInput {
         try {
             gm.getGame().start();
             roverUI.updateUI();
+            plateauUI.updateSampleUI();
 
         }catch (IllegalArgumentException e){
-            if (Message.ERR_MSG_FORBIDDEN_MOVE.equals(e.getMessage())){
-                getMessageText().setText(Message.FORBIDDEN_MOVE);
-            }
+            getMessageText().setText(e.getMessage());
         }
     }
 

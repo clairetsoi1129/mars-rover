@@ -27,13 +27,17 @@ public class AVehicle {
         }
         if (scene.reachBoundary(position)){
             // rollback the move
-            switch (direction) {
-                case N -> position.translate(0, -step);
-                case E -> position.translate(-step, 0);
-                case S -> position.translate(0, step);
-                case W -> position.translate(step, 0);
-            }
+            rollback(1);
             throw new IllegalArgumentException(Message.ERR_MSG_FORBIDDEN_MOVE);
+        }
+    }
+
+    public void rollback(int step){
+        switch (direction) {
+            case N -> position.translate(0, -step);
+            case E -> position.translate(-step, 0);
+            case S -> position.translate(0, step);
+            case W -> position.translate(step, 0);
         }
     }
 

@@ -2,10 +2,12 @@ package ui;
 
 import input.GUI;
 import model.AVehicle;
+import model.Rover;
 import util.Message;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.MessageFormat;
 import java.util.Objects;
 
 public class RoverUI {
@@ -36,6 +38,10 @@ public class RoverUI {
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(img)));
         roverLabel.setIcon(icon);
         roverLabel.setBounds(positionOnBoard.x, positionOnBoard.y, CELL_WIDTH, CELL_HEIGHT);
-        gui.getMessageText().setText(gui.getMessageText().getText()+" New Position:"+rover.getPosDir());
+        int basketSize = ((Rover)rover).getBasket().size();
+        String msg = MessageFormat.format("Your new positiion is {0}. You got {1} sample(s) now.",
+                rover.getPosDir(), basketSize);
+
+        gui.getMessageText().setText(gui.getMessageText().getText()+msg);
     }
 }
