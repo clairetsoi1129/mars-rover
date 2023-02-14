@@ -36,5 +36,6 @@ public class RoverUI {
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(img)));
         roverLabel.setIcon(icon);
         roverLabel.setBounds(positionOnBoard.x, positionOnBoard.y, CELL_WIDTH, CELL_HEIGHT);
+        gui.getMessageText().setText(gui.getMessageText().getText()+" New Position:"+rover.getPosDir());
     }
 }
