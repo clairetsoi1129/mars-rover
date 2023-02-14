@@ -137,19 +137,32 @@ public class ParameterUI {
 
     public Dimension getPlateauSize(){
         try {
+            int width = Integer.parseInt(widthText.getText());
+            int height = Integer.parseInt(heightText.getText());
+            if (width > 15 || height > 9)
+                throw new IllegalArgumentException();
             return new Dimension(Integer.parseInt(widthText.getText()),
                     Integer.parseInt(heightText.getText()));
         }catch (NumberFormatException e){
-            gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE);
+            gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE_GUI);
+        }catch (IllegalArgumentException e){
+            gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE_GUI);
         }
         return null;
     }
 
     public Point getRoverInitialPos(){
         try {
-            return new Point(Integer.parseInt(roverXText.getText()), Integer.parseInt(roverYText.getText()));
+            int x = Integer.parseInt(roverXText.getText());
+            int y = Integer.parseInt(roverYText.getText());
+            if (x > getPlateauSize().getWidth() || y > getPlateauSize().getHeight())
+                throw new IllegalArgumentException();
+
+            return new Point(x,y);
         }catch (NumberFormatException e){
             gui.getMessageText().setText(Message.ERR_MSG_INVALID_POS);
+        }catch (IllegalArgumentException e){
+            gui.getMessageText().setText(Message.ERR_MSG_INVALID_POS_OUTSIDE);
         }
         return null;
     }

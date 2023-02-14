@@ -40,14 +40,21 @@ public class FileInput extends AInput {
 
         Point initialPos = null;
         Direction direction = null;
+        int x = 0;
+        int y = 0;
         try {
-            initialPos = new Point(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
+            x = Integer.parseInt(strArray[0]);
+            y = Integer.parseInt(strArray[1]);
+            initialPos = new Point(x,y);
             direction = Direction.valueOf(strArray[2]);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         }
+
+        if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight())
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_OUTSIDE);
         return new Instruction(initialPos, direction);
     }
 

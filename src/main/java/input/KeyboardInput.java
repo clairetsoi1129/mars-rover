@@ -66,6 +66,9 @@ public class KeyboardInput extends AInput{
         }catch (InputMismatchException e) {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS);
         }
+
+        if (x > sceneDimension.width || y > sceneDimension.height)
+            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_OUTSIDE);
         return new Point(x,y);
     }
 
