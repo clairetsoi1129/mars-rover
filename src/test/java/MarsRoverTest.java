@@ -88,6 +88,20 @@ public class MarsRoverTest {
     }
 
     @Test
+    public void testNegativeSizeWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-negative-size.txt");
+            Game game = new Game(input, random);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_SIZE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     public void testWrongNoOfArgumentWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-wrong-no.txt");
@@ -124,6 +138,20 @@ public class MarsRoverTest {
         });
 
         String expectedMessage = Message.ERR_MSG_INVALID_POS_DIR;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testNegativeLocationWithFileInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            AInput input = new FileInput("input-negative-location.txt");
+            Game game = new Game(input, random);
+            game.start();
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_POS_OUTSIDE;
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -196,6 +224,54 @@ public class MarsRoverTest {
         });
 
         String expectedMessage = Message.ERR_MSG_INVALID_SIZE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testNegativeSizeWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("-10 -5%s1 2%sN%sLMLMLMLMM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input, random);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_SIZE;
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testNegativePosWithKeyboardInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            String userInput = String.format("10 5%s-1 -2%sN%sLMLMLMLMM%s",
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator(),
+                    System.lineSeparator());
+            InputStream sysInBackup = System.in;
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+
+            AInput input = new KeyboardInput();
+            Game game = new Game(input, random);
+            game.start();
+            System.setIn(sysInBackup);
+        });
+
+        String expectedMessage = Message.ERR_MSG_INVALID_POS_OUTSIDE;
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
