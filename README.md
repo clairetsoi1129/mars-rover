@@ -1,9 +1,4 @@
 # mars-rover
-
-## Key features
-
-## Assumptions
-
 ## UML diagram
 ## Class Diagram:
 ![class diagram](mars-rovers.drawio.png)
