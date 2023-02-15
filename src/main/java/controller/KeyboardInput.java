@@ -5,13 +5,11 @@ import model.Instruction;
 import util.Message;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class KeyboardInput extends AInput{
-    private List<Instruction> instructionList = new ArrayList<>();
+//    private List<Instruction> instructionList = new ArrayList<>();
 
     public KeyboardInput() {
         super();
@@ -91,7 +89,7 @@ public class KeyboardInput extends AInput{
         return movement.toCharArray();
     }
 
-    public List<Instruction> getVehicleInstruction(){
-        return instructionList;
-    }
+//    public List<Instruction> getVehicleInstruction(){
+//        return instructionList;
+//    }
 }

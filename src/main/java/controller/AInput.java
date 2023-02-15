@@ -19,6 +19,8 @@ public abstract class AInput {
         return sceneDimension;
     }
 
+    public abstract void parseSceneSize(Scanner scanner);
+
     public abstract Instruction parseInitialPosDirection(Scanner scanner);
 
     public abstract char[] parseMovement(Scanner scanner);

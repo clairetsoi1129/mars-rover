@@ -7,7 +7,6 @@ import util.Message;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Scanner;
 
 public class FileInput extends AInput {
@@ -77,11 +76,11 @@ public class FileInput extends AInput {
         }
     }
 
-    public Dimension getSceneSize() {
-        return sceneDimension;
-    }
+//    public Dimension getSceneSize() {
+//        return sceneDimension;
+//    }
 
-    public List<Instruction> getVehicleInstruction() {
-        return instructionList;
-    }
+//    public List<Instruction> getVehicleInstruction() {
+//        return instructionList;
+//    }
 }

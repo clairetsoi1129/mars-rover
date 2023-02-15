@@ -113,9 +113,11 @@ public class GuiInput extends AInput{
         arrowButton.addActionListener(ev -> {
             switch (cmd) {
                 case CMD_GO_SCENES_1 -> {
-                    Dimension dim = getPlateauSize();
-                    Point pos = getRoverInitialPos();
-                    Direction dir = getRoverInitialDirection();
+                    parseSceneSize(null);
+                    Dimension dim = sceneDimension;
+                    Instruction instruction = parseInitialPosDirection(null);
+                    Point pos = instruction.getInitialPosition();
+                    Direction dir = instruction.getDirection();
 
                     if (dim != null && pos != null && dir != null) {
                         sceneDimension = dim;
@@ -135,27 +137,27 @@ public class GuiInput extends AInput{
         panel.add(arrowButton);
     }
 
-    public Dimension getPlateauSize(){
+    @Override
+    public void parseSceneSize(Scanner scanner){
         try {
             int width = Integer.parseInt(widthText.getText());
             int height = Integer.parseInt(heightText.getText());
             if (width > 15 || height > 9)
                 throw new IllegalArgumentException();
-            return new Dimension(Integer.parseInt(widthText.getText()),
+            sceneDimension = new Dimension(Integer.parseInt(widthText.getText()),
                     Integer.parseInt(heightText.getText()));
         }catch (NumberFormatException e){
             gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE_GUI);
         }catch (IllegalArgumentException e){
             gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE_GUI);
         }
-        return null;
     }
 
-    public Point getRoverInitialPos(){
+    public Point parseRoverInitialPos(){
         try {
             int x = Integer.parseInt(roverXText.getText());
             int y = Integer.parseInt(roverYText.getText());
-            if (x > getPlateauSize().getWidth() || y > getPlateauSize().getHeight())
+            if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight())
                 throw new IllegalArgumentException();
 
             return new Point(x,y);
@@ -167,7 +169,7 @@ public class GuiInput extends AInput{
         return null;
     }
 
-    public Direction getRoverInitialDirection(){
+    public Direction parseRoverInitialDirection(){
         try {
             return Direction.valueOf(roverDirText.getText().trim().toUpperCase());
         }catch (IllegalArgumentException e){
@@ -179,7 +181,9 @@ public class GuiInput extends AInput{
     @Override
     public Instruction parseInitialPosDirection(Scanner scanner) {
         // scanner is useless in GUI
-        return new Instruction(getRoverInitialPos(), getRoverInitialDirection());
+        Instruction instruction = new Instruction(parseRoverInitialPos(), parseRoverInitialDirection());
+        instructionList.add(instruction);
+        return instruction;
     }
 
     @Override
