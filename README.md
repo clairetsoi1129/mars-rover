@@ -9,12 +9,14 @@
 2. Player need to avoid hitting the boundary of plateau and obstacles to collect samples.
 
 #### Flow of file input:
+0. Run the MarsRoverTest to test the game
 1. Player needs to provide a file which states the plateau size and initial position and direction of rovers and a set of instruction (L/R/M) for each rover (It supports mutliple rovers).
 2. Program will base on plateau size to generate the samples for rover to collect and obstacles to block the ways of rover 
 3. The game will end after program process the instruction and then display the final location of the rovers and number of samples they collected.
 4. If any step hit the boundary of plateau or hit the obstacle. Exception will throw and halt the program.
 
 #### Flow of keyboard input:
+0. Run the Game Main function to start the game
 1. The game will ask user to input the plateau size and initial position and direction of rover. (It supports one rover only.)
 2. Program will base on plateau size to generate the samples for rover to collect and obstacles to block the ways of rover
 3. Then the game will display the locations of samples / obstacles.
@@ -23,6 +25,7 @@
 6. If any step hit the boundary of plateau or hit the obstacle. Exception will throw and halt the program.
 
 #### Flow of GUI input:
+0. Run the GameManager function to start the game
 1. The game will ask user to input the plateau size and initial position and direction of rover. (It supports one rover only.)
 2. Then the game will display the locations of samples / obstacles in the plateau.
 3. Player can then input the instruction (L/R/M) by right-click on the rover to control its path.
