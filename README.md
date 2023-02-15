@@ -88,3 +88,4 @@ Since the screen is limited to 800x500, the plateau size can only support up to 
 <a href="https://www.flaticon.com/free-icons/mars-rover" title="mars-rover icons">Mars-rover icons created by Eucalyp - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/mineral" title="mineral icons">Mineral icons created by Freepik - Flaticon</a>
 <a href="https://pixabay.com/vectors/arrow-go-icon-icons-matt-next-1294468/">Arrow image by Pixabay </a>
+<a href="https://www.vecteezy.com/free-vector/steam-train">Steam Train Vectors by Vecteezy</a>

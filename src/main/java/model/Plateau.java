@@ -59,7 +59,7 @@ public class Plateau extends AScene {
         Sample tmpSample = null;
 
         for (Sample sample : samples) {
-            if (sample.getLocation().equals(location)) {
+            if (sample.getLocation().equals(location) && !sample.isDigged()) {
                 tmpSample = sample;
                 tmpSample.setDigged(true);
             }
