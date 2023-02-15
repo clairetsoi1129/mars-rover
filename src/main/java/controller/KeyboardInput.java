@@ -38,6 +38,10 @@ public class KeyboardInput extends AInput{
             x = in.nextInt();
             System.out.println(Message.MSG_PLATEAU_HEIGHT);
             y = in.nextInt();
+
+            if (x < 1 || y < 1){
+                throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
+            }
         }catch (InputMismatchException e) {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
         }
@@ -65,7 +69,7 @@ public class KeyboardInput extends AInput{
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS);
         }
 
-        if (x > sceneDimension.width || y > sceneDimension.height)
+        if (x > sceneDimension.width || y > sceneDimension.height || x < 0 || y < 0)
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_OUTSIDE);
         return new Point(x,y);
     }
@@ -88,8 +92,4 @@ public class KeyboardInput extends AInput{
         String movement = scanner.nextLine();
         return movement.toCharArray();
     }
-
-//    public List<Instruction> getVehicleInstruction(){
-//        return instructionList;
-//    }
 }

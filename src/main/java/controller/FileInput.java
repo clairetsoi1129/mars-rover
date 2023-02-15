@@ -52,7 +52,7 @@ public class FileInput extends AInput {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         }
 
-        if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight())
+        if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight() || x < 0 || y < 0)
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_OUTSIDE);
         return new Instruction(initialPos, direction);
     }
@@ -70,17 +70,14 @@ public class FileInput extends AInput {
         }
 
         try {
-            sceneDimension = new Dimension(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
+            int x = Integer.parseInt(strArray[0]);
+            int y = Integer.parseInt(strArray[1]);
+            if (x < 1 || y < 1){
+                throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
+            }
+            sceneDimension = new Dimension(x, y);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_SIZE);
         }
     }
-
-//    public Dimension getSceneSize() {
-//        return sceneDimension;
-//    }
-
-//    public List<Instruction> getVehicleInstruction() {
-//        return instructionList;
-//    }
 }

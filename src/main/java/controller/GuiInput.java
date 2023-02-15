@@ -142,7 +142,7 @@ public class GuiInput extends AInput{
         try {
             int width = Integer.parseInt(widthText.getText());
             int height = Integer.parseInt(heightText.getText());
-            if (width > 15 || height > 9)
+            if (width > 15 || height > 9 || width < 1 || height < 1)
                 throw new IllegalArgumentException();
             sceneDimension = new Dimension(Integer.parseInt(widthText.getText()),
                     Integer.parseInt(heightText.getText()));
@@ -157,7 +157,7 @@ public class GuiInput extends AInput{
         try {
             int x = Integer.parseInt(roverXText.getText());
             int y = Integer.parseInt(roverYText.getText());
-            if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight())
+            if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight() || x < 0 || y < 0)
                 throw new IllegalArgumentException();
 
             return new Point(x,y);
