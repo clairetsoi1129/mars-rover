@@ -2,6 +2,7 @@ package model;
 
 import controller.Game;
 import java.awt.*;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class Plateau extends AScene {
         for (int i=0; i < noOfSample; i++){
             Sample sample = new Sample(game.getRandom().getGeneratedLocation(i));
             samples.add(sample);
+            System.out.println(MessageFormat.format("Sample[{0}]:[{1},{2}]",
+                    i, sample.getLocation().x, sample.getLocation().y));
         }
     }
 
@@ -36,6 +39,8 @@ public class Plateau extends AScene {
         for (int i=0; i < noOfObstacle; i++){
             Obstacle obstacle = new Obstacle(game.getRandom().getGeneratedLocation(i+noOfSample));
             obstacles.add(obstacle);
+            System.out.println(MessageFormat.format("Obstacle[{0}]:[{1},{2}]",
+                    i, obstacle.getLocation().x, obstacle.getLocation().y));
         }
     }
 
@@ -59,7 +64,20 @@ public class Plateau extends AScene {
                 tmpSample.setDigged(true);
             }
         }
+        if (allSamplesDigged())
+            game.endGame();
         return tmpSample;
+    }
+
+    public boolean allSamplesDigged(){
+        boolean allSamplesDigged = true;
+        for (Sample sample : samples) {
+            if (!sample.isDigged()) {
+                allSamplesDigged = false;
+                break;
+            }
+        }
+        return allSamplesDigged;
     }
 
     public List<Sample> getSamples() {

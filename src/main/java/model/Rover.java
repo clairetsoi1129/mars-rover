@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Rover extends AVehicle{
     private List<Sample> basket;
+
     public Rover(Instruction instruction, Game game){
         super(instruction, game);
         basket = new ArrayList<>();

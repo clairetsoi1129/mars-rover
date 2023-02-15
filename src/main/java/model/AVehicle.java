@@ -12,6 +12,8 @@ public class AVehicle {
     protected char[] movements;
     protected Game game;
 
+    protected String stepsTaken="";
+
     public AVehicle(Instruction instruction, Game game){
         this.position = instruction.getInitialPosition();
         this.direction = instruction.getDirection();
@@ -34,6 +36,7 @@ public class AVehicle {
     }
 
     public void rollback(int step){
+        stepsTaken=stepsTaken.substring(0, stepsTaken.length()-1)+"[M]";
         switch (direction) {
             case N -> position.translate(0, -step);
             case E -> position.translate(-step, 0);
@@ -83,8 +86,10 @@ public class AVehicle {
 
     private void go(char movement){
         if (movement == Movement.L.asChar() || movement == Movement.R.asChar()) {
+            stepsTaken += movement;
             turn(movement);
         } else if (movement == Movement.M.asChar()) {
+            stepsTaken += movement;
             move(1);
         } else {
             throw new IllegalArgumentException(Message.ERR_MSG_WRONG_INSTRUCTION);
@@ -106,5 +111,13 @@ public class AVehicle {
 
     public void setMovements(char[] movements) {
         this.movements = movements;
+    }
+
+    public String getStepsTaken() {
+        return stepsTaken;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

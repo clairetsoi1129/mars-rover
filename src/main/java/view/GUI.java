@@ -68,7 +68,7 @@ public class GUI extends AInput {
         messageText.setEditable(false);
         messageText.setLineWrap(true);
         messageText.setWrapStyleWord(true);
-        messageText.setFont(new Font("Book Antiqua", Font.PLAIN, 26));
+        messageText.setFont(new Font("Book Antiqua", Font.PLAIN, 18));
         window.add(messageText);
     }
 

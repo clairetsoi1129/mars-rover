@@ -5,6 +5,7 @@ import util.RandomLocation;
 import util.RandomLocationImpl;
 
 import java.awt.*;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,10 @@ public class Game {
 
     private RandomLocation random;
 
+    private boolean isGameEnd;
+
     public Game(AInput input) {
+        isGameEnd = false;
         List<Instruction> vehicleInstruction = input.getVehicleInstruction();
         rovers = new ArrayList<>();
         for (Instruction instruction: vehicleInstruction){
@@ -31,6 +35,7 @@ public class Game {
     }
 
     public Game(AInput input, RandomLocation random) {
+        isGameEnd = false;
         List<Instruction> vehicleInstruction = input.getVehicleInstruction();
 
         rovers = new ArrayList<>();
@@ -59,10 +64,19 @@ public class Game {
         AInput input = new KeyboardInput();
         Game game = new Game(input);
         game.start();
-        System.out.println("Final Destination:"+game.getRovers().get(0).getPosDir());
+        System.out.println(MessageFormat.format("Final Destination:{0}. You have collected {1} samples.",
+                game.getRovers().get(0).getPosDir(), ((Rover)game.getRovers().get(0)).getBasket().size()));
     }
 
     public RandomLocation getRandom() {
         return random;
+    }
+
+    public boolean isGameEnd() {
+        return isGameEnd;
+    }
+
+    public void endGame(){
+        isGameEnd = true;
     }
 }
