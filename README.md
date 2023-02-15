@@ -31,8 +31,7 @@
 6. If all the samples are collected, the game will end.
 
 ## Assumptions
-File controller:
-
+#### For File input:
 1. There will be 1 row at the top to indicate the screen size.
 2. And then 1 row for specifying each rover init location and direction. 
 Init location x, y are integers and should be within the plateau. And direction accepts N,E,S,W only.
@@ -44,7 +43,7 @@ Init location x, y are integers and should be within the plateau. And direction 
 8. If the rover enter the box with samples, rover will collect the samples, the count will be shown.
 9. Game will end after program process the file and calculated the final location and no. of samples collected.
 
-For Keyboard Input:
+#### For Keyboard Input:
 1. First, the text UI will ask for plateau width and height. They must be integers. 
 2. Second, the text UI will ask for rover initial position. They must be integers too and should be within the plateau.
 3. Thirdly, the text UI will ask for rover initial direction. Direction must be N,E,S,W.
@@ -54,7 +53,7 @@ For Keyboard Input:
 7. If the rover hit the obstacles, the program will throw exception and halt.
 8. If the rover enter the box with samples, rover will collect the samples, the count will be shown.
 
-For GUI controller:
+#### For GUI controller:
 Since the screen is limited to 800x500, the plateau size can only support up to 15x9.
 1. First screen show a parameter request form to ask for plateau size and initial position / direction of rover.
 2. Validation of plateau size are 15x9.  
