@@ -69,8 +69,8 @@ Since the screen is limited to 800x500, the plateau size can only support up to 
 ## Approaches
 1. Implement simple logic by getting Input from files
 2. Add boundary check
-3. Implement logic by getting user input
-4. Implement GUI in swing
+3. Implement logic by getting keyboard input
+4. Implement GUI in swing and logic
 5. Validate user input
 6. Add obstacle to block the way of rover
 7. Add sample for rover to collect
