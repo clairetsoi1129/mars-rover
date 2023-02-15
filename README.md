@@ -6,7 +6,7 @@
 ## Key Feature:
 1. The game support 3 types of user controller, i.e.
    File input controller, Keyboard input controller, GUI input controller.
-2. Player need to avoid hitting the boundary of plateau and obstacles to collect samples.
+2. Player need to avoid hitting the boundary of plateau and obstacles to collect samples. The no. of samples and obstacles are the size of plateau / 10.
 
 #### Flow of file input:
 0. Run the MarsRoverTest to test the game
@@ -19,8 +19,8 @@
 0. Run the Game Main function to start the game
 1. The game will ask user to input the plateau size and initial position and direction of rover. (It supports one rover only.)
 2. Program will base on plateau size to generate the samples for rover to collect and obstacles to block the ways of rover
-3. Then the game will display the locations of samples / obstacles.
-4. Player can then input the instruction (L/R/M) in one line to control the rover path.
+3. Player can then input the instruction (L/R/M) in one line to control the rover path.
+4. The game will then display the locations of samples / obstacles.
 5. The game will end after program display final location of the rover and number of samples collected.
 6. If any step hit the boundary of plateau or hit the obstacle. Exception will throw and halt the program.
 

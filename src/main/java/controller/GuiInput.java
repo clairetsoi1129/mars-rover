@@ -157,8 +157,9 @@ public class GuiInput extends AInput{
         try {
             int x = Integer.parseInt(roverXText.getText());
             int y = Integer.parseInt(roverYText.getText());
-            if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight() || x < 0 || y < 0)
-                throw new IllegalArgumentException();
+            if (sceneDimension != null)
+                if (x > sceneDimension.getWidth() || y > sceneDimension.getHeight() || x < 0 || y < 0)
+                    throw new IllegalArgumentException();
 
             return new Point(x,y);
         }catch (NumberFormatException e){

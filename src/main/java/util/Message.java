@@ -39,8 +39,8 @@ public class Message {
 
     public static final String ERR_MSG_INVALID_POS_DIR = "Invalid vehicle initial position or initial direction.";
 
-    public static final String ERR_MSG_INVALID_SIZE = "Input is not a valid size. Please input integer only.";
-    public static final String ERR_MSG_INVALID_SIZE_GUI = "Input is not a valid size. Please input integer only. Max allowable size is 15 x 9.";
+    public static final String ERR_MSG_INVALID_SIZE = "Input is not a valid size. Please input integer which is greater than or equals to 1 only.";
+    public static final String ERR_MSG_INVALID_SIZE_GUI = "Input is not a valid size. Please input integer which is greater than or equals to 1 only. Max allowable size is 15 x 9.";
     public static final String ERR_MSG_INVALID_DIR = "Input is not a valid direction. Please input N,E,S,W only.";
     public static final String ERR_MSG_INVALID_POS = "Input is not a valid position. Please input integer only.";
     public static final String ERR_MSG_INVALID_POS_OUTSIDE = "Input is out of plateau size.";
