@@ -3,18 +3,15 @@ package view;
 import controller.AInput;
 import controller.GameManager;
 import controller.GuiInput;
-import model.Instruction;
 import util.Message;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
-public class GUI extends AInput {
+public class GUI {
     private GameManager gm;
     private JFrame window;
     private JTextArea messageText;
@@ -44,7 +41,7 @@ public class GUI extends AInput {
     private RoverUI roverUI;
     private PlateauUI plateauUI;
 
-    private GuiInput parameterUI;
+    private AInput guiInput;
 
     public GUI(GameManager gm) {
         super();
@@ -160,7 +157,7 @@ public class GUI extends AInput {
 
     private void initMainBoard() {
         createBackground(0, BG_IMG);
-        parameterUI = new GuiInput(this);
+        guiInput = new GuiInput(this);
         bgPanel[0].add(bgLabel[0]);
     }
 
@@ -188,7 +185,7 @@ public class GUI extends AInput {
     }
 
     public Point translateObjectPos(int x, int y) {
-        Dimension dim = sceneDimension;
+        Dimension dim = getGuiInput().getSceneSize();
         Point pos = getGridPos(x, dim.height - y - 1);
         return new Point(pos.x-CELL_WIDTH/2, pos.y+CELL_HEIGHT/2);
     }
@@ -198,7 +195,7 @@ public class GUI extends AInput {
     }
 
     public Point getGridPos(int x, int y) {
-        Dimension dim = sceneDimension;
+        Dimension dim = getGuiInput().getSceneSize();
         return new Point((WIN_WIDTH / 2 - (dim.width) * CELL_WIDTH / 2 + x * CELL_WIDTH),
                 (WIN_HEIGHT - TEXT_AREA_HEIGHT) / 2 + (dim.height) * CELL_HEIGHT / 2 - (dim.height - y) * CELL_HEIGHT);
     }
@@ -211,24 +208,11 @@ public class GUI extends AInput {
         return bgPanel;
     }
 
-    public Instruction parseInitialPosDirection(Scanner scanner) {
-        return null;
-    }
-
-    public char[] parseMovement(Scanner scanner) {
-        return null;
-    }
-
     public GameManager getGm() {
         return gm;
     }
 
-    public void setSceneDimension(Dimension sceneDimension) {
-        this.sceneDimension = sceneDimension;
+    public AInput getGuiInput() {
+        return guiInput;
     }
-
-    public void setInstructionList(List<Instruction> instructionList) {
-        this.instructionList = instructionList;
-    }
-
 }

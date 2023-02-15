@@ -39,15 +39,15 @@ public class RoverUI {
         roverLabel.setBounds(positionOnBoard.x, positionOnBoard.y, CELL_WIDTH, CELL_HEIGHT);
         int basketSize = ((Rover)rover).getBasket().size();
         String steps = rover.getStepsTaken();
-        String msg = "";
+        String msg;
 
         if (rover.getGame().isGameEnd())
             msg = MessageFormat.format("Congratulation! You have collected all the samples. Total samples collected is {0}. Your final position is {1}. Steps taken are {2}.",
                     basketSize, rover.getPosDir(), steps);
         else
-            msg = MessageFormat.format("Your new positiion is {0}. You got {1} sample(s) now. Steps: {2}.",
-                    rover.getPosDir(), basketSize, steps);
+            msg = MessageFormat.format("{0}. Your new positiion is {1}. You got {2} sample(s) now. Steps: {3}.",
+                    gui.getMessageText().getText(), rover.getPosDir(), basketSize, steps);
 
-        gui.getMessageText().setText(gui.getMessageText().getText()+msg);
+        gui.getMessageText().setText(msg);
     }
 }

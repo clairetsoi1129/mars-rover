@@ -18,7 +18,7 @@ public class GameManager {
     }
 
     public void initGame(){
-        game = new Game(gui);
+        game = new Game(gui.getGuiInput());
     }
 
     public static void main(String[] args){

@@ -8,10 +8,10 @@ import view.GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
-public class GuiInput {
+public class GuiInput extends AInput{
     private GUI gui;
     private JFormattedTextField widthText;
     private JFormattedTextField heightText;
@@ -26,6 +26,7 @@ public class GuiInput {
 
     private final String CMD_GO_SCENES_1 = "goScene1";
     private final String CMD_GO_SCENES_0 = "goScene0";
+
 
     public GuiInput(GUI gui) {
         this.gui = gui;
@@ -117,10 +118,9 @@ public class GuiInput {
                     Direction dir = getRoverInitialDirection();
 
                     if (dim != null && pos != null && dir != null) {
-                        gui.setSceneDimension(dim);
-                        List<Instruction> instructionList = new ArrayList<>();
+                        sceneDimension = dim;
+                        instructionList = new ArrayList<>();
                         instructionList.add(new Instruction(pos, dir));
-                        gui.setInstructionList(instructionList);
                         gui.initGameBoardComponents();
                         gui.getGm().getScreenChanger().showScreen1();
                     }
@@ -174,5 +174,17 @@ public class GuiInput {
             gui.getMessageText().setText(Message.ERR_MSG_INVALID_DIR);
         }
         return null;
+    }
+
+    @Override
+    public Instruction parseInitialPosDirection(Scanner scanner) {
+        // scanner is useless in GUI
+        return new Instruction(getRoverInitialPos(), getRoverInitialDirection());
+    }
+
+    @Override
+    public char[] parseMovement(Scanner scanner) {
+        // this function is useless in GUI
+        return new char[0];
     }
 }
