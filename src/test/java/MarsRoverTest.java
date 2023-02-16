@@ -36,7 +36,7 @@ public class MarsRoverTest {
 
     @Test
     public void testNormalMovementOfRoverWithFileInput() {
-        AInput input = new FileInput("input-normal.txt");
+        AInput input = new FileInput("testcases/input-normal.txt");
         Game game = new Game(input, random);
         game.start();
         assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
@@ -47,7 +47,7 @@ public class MarsRoverTest {
 
     @Test
     public void test3NormalMovementOfRoverWithFileInput() {
-        AInput input = new FileInput("input-3rovers.txt");
+        AInput input = new FileInput("testcases/input-3rovers.txt");
         Game game = new Game(input, random);
         game.start();
         assertEquals("1 0 E", game.getRovers().get(0).getPosDir());
@@ -61,7 +61,7 @@ public class MarsRoverTest {
     @Test
     public void testHitBoundaryWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-hitboundary.txt");
+            AInput input = new FileInput("testcases/input-hitboundary.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -75,7 +75,7 @@ public class MarsRoverTest {
     @Test
     public void testHitObstacleWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-obstacle.txt");
+            AInput input = new FileInput("testcases/input-obstacle.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -89,7 +89,7 @@ public class MarsRoverTest {
     @Test
     public void testDecimalSizeWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-decimal-size.txt");
+            AInput input = new FileInput("testcases/input-decimal-size.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -103,7 +103,7 @@ public class MarsRoverTest {
     @Test
     public void testNegativeSizeWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-negative-size.txt");
+            AInput input = new FileInput("testcases/input-negative-size.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -117,7 +117,7 @@ public class MarsRoverTest {
     @Test
     public void testWrongNoOfArgumentWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-wrong-no.txt");
+            AInput input = new FileInput("testcases/input-wrong-no.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -131,7 +131,7 @@ public class MarsRoverTest {
     @Test
     public void testInitPosOutsideWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-pos-outside.txt");
+            AInput input = new FileInput("testcases/input-pos-outside.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -145,7 +145,7 @@ public class MarsRoverTest {
     @Test
     public void testDecimalLocationWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-decimal-location.txt");
+            AInput input = new FileInput("testcases/input-decimal-location.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -159,7 +159,7 @@ public class MarsRoverTest {
     @Test
     public void testNegativeLocationWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-negative-location.txt");
+            AInput input = new FileInput("testcases/input-negative-location.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -173,7 +173,7 @@ public class MarsRoverTest {
     @Test
     public void testWrongDirectionWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-wrong-direction.txt");
+            AInput input = new FileInput("testcases/input-wrong-direction.txt");
             Game game = new Game(input, random);
             game.start();
         });
@@ -187,7 +187,7 @@ public class MarsRoverTest {
     @Test
     public void testWrongInstructionWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            AInput input = new FileInput("input-wrong-instruction.txt");
+            AInput input = new FileInput("testcases/input-wrong-instruction.txt");
             Game game = new Game(input, random);
             game.start();
         });
