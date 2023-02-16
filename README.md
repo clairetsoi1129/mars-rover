@@ -79,12 +79,13 @@ Since the screen is limited to 800x500, the plateau size can only support up to 
 8. Randomize the location of samples and obstacles
 
 ## Future thoughts
-1. Add back the unit test for single class
-2. Implement GUI in Java FX
-3. To support sizeable screen and sizeable image. So the gui plateau size does not bound to be 15x9.
-4. Add background music, eg. star war music?!
-5. Add feature to allow user to choose other vehicles, eg. flying scotsman
-6. Add aliens to catch the rover, if rover is caught, then game over.
+1. Add back the unit test for each single class
+2. Refactor the validation code to validator 
+3. Implement GUI in Java FX
+4. To support sizeable screen and sizeable image. So the gui plateau size does not bound to be 15x9.
+5. Add background music, eg. star war music?!
+6. Add feature to allow user to choose other vehicles, eg. flying scotsman
+7. Add aliens to catch the rover, if rover is caught, then game over.
 
 ## Copyright
 <a href="https://www.vecteezy.com/free-vector/mars-surface">Mars Surface Vectors by Vecteezy</a>
