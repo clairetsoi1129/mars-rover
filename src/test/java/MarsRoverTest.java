@@ -46,6 +46,19 @@ public class MarsRoverTest {
     }
 
     @Test
+    public void test3NormalMovementOfRoverWithFileInput() {
+        AInput input = new FileInput("input-3rovers.txt");
+        Game game = new Game(input, random);
+        game.start();
+        assertEquals("1 0 E", game.getRovers().get(0).getPosDir());
+        assertEquals(0, ((Rover)game.getRovers().get(0)).getBasket().size());
+        assertEquals("1 3 N", game.getRovers().get(1).getPosDir());
+        assertEquals(1, ((Rover)game.getRovers().get(1)).getBasket().size());
+        assertEquals("5 1 E", game.getRovers().get(2).getPosDir());
+        assertEquals(0, ((Rover)game.getRovers().get(2)).getBasket().size());
+    }
+
+    @Test
     public void testHitBoundaryWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("input-hitboundary.txt");

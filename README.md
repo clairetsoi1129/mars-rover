@@ -69,7 +69,7 @@ Since the screen is limited to 800x500, the plateau size can only support up to 
 9. Game will end after all samples are collected.
 
 ## Approaches
-1. Implement simple logic by getting Input from files
+1. Implement logic by getting Input from files and show the last position of rover
 2. Add boundary check
 3. Implement logic by getting keyboard input
 4. Implement GUI in swing and logic
@@ -79,11 +79,12 @@ Since the screen is limited to 800x500, the plateau size can only support up to 
 8. Randomize the location of samples and obstacles
 
 ## Future thoughts
-1. Implement GUI in Java FX
-2. To support sizeable screen and sizeable image. So the gui plateau size does not bound to be 15x9.
-3. Add background music, eg. star war music?!
-4. Add feature to allow user to choose other vehicles, eg. flying scotsman
-5. Add aliens to catch the rover, if rover is caught, then game over.
+1. Add back the unit test for single class
+2. Implement GUI in Java FX
+3. To support sizeable screen and sizeable image. So the gui plateau size does not bound to be 15x9.
+4. Add background music, eg. star war music?!
+5. Add feature to allow user to choose other vehicles, eg. flying scotsman
+6. Add aliens to catch the rover, if rover is caught, then game over.
 
 ## Copyright
 <a href="https://www.vecteezy.com/free-vector/mars-surface">Mars Surface Vectors by Vecteezy</a>
