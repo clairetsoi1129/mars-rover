@@ -1,12 +1,12 @@
-# mars-rover
-## UML diagram
-## Class Diagram:
-![class diagram](mars-rovers.drawio.png)
-
+# Mars Rover
 ## Key Feature:
 1. The game support 3 types of user controller, i.e.
    File input controller, Keyboard input controller, GUI input controller.
 2. Player need to avoid hitting the boundary of plateau and obstacles to collect samples. The no. of samples and obstacles are the size of plateau / 10.
+
+## UML diagram
+## Class Diagram:
+![class diagram](mars-rovers.drawio.png)
 
 #### Flow of file input:
 0. Run the MarsRoverTest to test the game
