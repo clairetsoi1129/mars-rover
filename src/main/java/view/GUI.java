@@ -7,6 +7,8 @@ import util.Message;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Objects;
@@ -48,7 +50,9 @@ public class GUI {
         this.gm = gm;
         initMainWindow();
         initMainBoard();
+
         window.setVisible(true);
+
     }
 
     private void initMainWindow() {
@@ -116,6 +120,7 @@ public class GUI {
         ImageIcon objectIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(objImg)));
         objectLabel.setIcon(objectIcon);
 
+
         objectLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -167,6 +172,35 @@ public class GUI {
         plateauUI = new PlateauUI(gm.getGame().getPlateau(), this);
         roverUI = new RoverUI(gm.getGame().getRovers().get(0), this);
         bgPanel[1].add(bgLabel[1]);
+
+        bgPanel[1].addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (KeyEvent.getKeyText(e.getKeyCode())) {
+                    case "L" -> {
+                        gm.getEvHandler().turnLeft();
+                        updateRover(KeyEvent.getKeyText(e.getKeyCode()).toCharArray());
+                    }
+                    case "R" -> {
+                        gm.getEvHandler().turnRight();
+                        updateRover(KeyEvent.getKeyText(e.getKeyCode()).toCharArray());
+                    }
+                    case "M" -> {
+                        gm.getEvHandler().moveForward();
+                        updateRover(KeyEvent.getKeyText(e.getKeyCode()).toCharArray());
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+        bgPanel[1].setFocusable(true);
     }
 
     private void updateRover(char[] command) {
@@ -179,7 +213,7 @@ public class GUI {
             roverUI.updateUI();
             plateauUI.updateSampleUI();
 
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             getMessageText().setText(e.getMessage());
         }
     }
@@ -187,7 +221,7 @@ public class GUI {
     public Point translateObjectPos(int x, int y) {
         Dimension dim = getGuiInput().getSceneSize();
         Point pos = getGridPos(x, dim.height - y - 1);
-        return new Point(pos.x-CELL_WIDTH/2, pos.y+CELL_HEIGHT/2);
+        return new Point(pos.x - CELL_WIDTH / 2, pos.y + CELL_HEIGHT / 2);
     }
 
     public Point translateObjectPos(Point point) {
