@@ -26,7 +26,7 @@ public class FileInput extends AInput {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Input file not found");
+            System.err.println("Input file not found");
         }
     }
 
@@ -46,8 +46,6 @@ public class FileInput extends AInput {
             y = Integer.parseInt(strArray[1]);
             initialPos = new Point(x,y);
             direction = Direction.valueOf(strArray[2]);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(Message.ERR_MSG_INVALID_POS_DIR);
         }

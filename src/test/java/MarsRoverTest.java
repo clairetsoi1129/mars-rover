@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
-public class MarsRoverTest {
+class MarsRoverTest {
     @Mock
     RandomLocation random;
 
@@ -35,8 +35,9 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testNormalMovementOfRoverWithFileInput() {
+    void testNormalMovementOfRoverWithFileInput() {
         AInput input = new FileInput("testcases/input-normal.txt");
+
         Game game = new Game(input, random);
         game.start();
         assertEquals("1 3 N", game.getRovers().get(0).getPosDir());
@@ -46,7 +47,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void test3NormalMovementOfRoverWithFileInput() {
+    void test3NormalMovementOfRoverWithFileInput() {
         AInput input = new FileInput("testcases/input-3rovers.txt");
         Game game = new Game(input, random);
         game.start();
@@ -59,7 +60,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testHitBoundaryWithFileInput() {
+    void testHitBoundaryWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-hitboundary.txt");
             Game game = new Game(input, random);
@@ -73,7 +74,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testHitObstacleWithFileInput() {
+    void testHitObstacleWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-obstacle.txt");
             Game game = new Game(input, random);
@@ -87,7 +88,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testDecimalSizeWithFileInput() {
+    void testDecimalSizeWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-decimal-size.txt");
             Game game = new Game(input, random);
@@ -101,7 +102,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testNegativeSizeWithFileInput() {
+    void testNegativeSizeWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-negative-size.txt");
             Game game = new Game(input, random);
@@ -115,7 +116,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testWrongNoOfArgumentWithFileInput() {
+    void testWrongNoOfArgumentWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-wrong-no.txt");
             Game game = new Game(input, random);
@@ -129,7 +130,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testInitPosOutsideWithFileInput() {
+    void testInitPosOutsideWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-pos-outside.txt");
             Game game = new Game(input, random);
@@ -143,7 +144,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testDecimalLocationWithFileInput() {
+    void testDecimalLocationWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-decimal-location.txt");
             Game game = new Game(input, random);
@@ -157,7 +158,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testNegativeLocationWithFileInput() {
+    void testNegativeLocationWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-negative-location.txt");
             Game game = new Game(input, random);
@@ -171,7 +172,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testWrongDirectionWithFileInput() {
+    void testWrongDirectionWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-wrong-direction.txt");
             Game game = new Game(input, random);
@@ -185,7 +186,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testWrongInstructionWithFileInput() {
+    void testWrongInstructionWithFileInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             AInput input = new FileInput("testcases/input-wrong-instruction.txt");
             Game game = new Game(input, random);
@@ -199,7 +200,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testNormalMovementOfRoverWithKeyboardInput() {
+    void testNormalMovementOfRoverWithKeyboardInput() {
         String userInput = String.format("5 5%s1 2%sN%sLMLMLMLMM%s",
                 System.lineSeparator(),
                 System.lineSeparator(),
@@ -219,7 +220,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testDecimalSizeWithKeyboardInput() {
+    void testDecimalSizeWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("10.5 5.5%s1 2%sN%sLMLMLMLMM%s",
                     System.lineSeparator(),
@@ -243,7 +244,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testNegativeSizeWithKeyboardInput() {
+    void testNegativeSizeWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("-10 -5%s1 2%sN%sLMLMLMLMM%s",
                     System.lineSeparator(),
@@ -267,7 +268,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testNegativePosWithKeyboardInput() {
+    void testNegativePosWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("10 5%s-1 -2%sN%sLMLMLMLMM%s",
                     System.lineSeparator(),
@@ -291,7 +292,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testHitBoundaryWithKeyboardInput() {
+    void testHitBoundaryWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("5 5%s0 0%sW%sM%s",
                     System.lineSeparator(),
@@ -315,7 +316,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testDecimalLocationWithKeyboardInput() {
+    void testDecimalLocationWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("5 5%s1.3 2%sN%sLMLMLMLMM%s",
                     System.lineSeparator(),
@@ -339,7 +340,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testWrongDirectionWithKeyboardInput() {
+    void testWrongDirectionWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("5 5%s1 2%sK%sLMLMLMLMM%s",
                     System.lineSeparator(),
@@ -363,7 +364,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testWrongInstructionWithKeyboardInput() {
+    void testWrongInstructionWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("5 5%s1 2%sN%sPMLMLMLMM%s",
                     System.lineSeparator(),
@@ -387,7 +388,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testInitPosOutsideWithKeyboardInput() {
+    void testInitPosOutsideWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("5 5%s8 2%sN%sMLMLMLMM%s",
                     System.lineSeparator(),
@@ -411,7 +412,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void testHitObstacleWithKeyboardInput() {
+    void testHitObstacleWithKeyboardInput() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String userInput = String.format("5 5%s1 2%sE%sMM%s",
                     System.lineSeparator(),

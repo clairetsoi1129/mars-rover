@@ -31,8 +31,6 @@ public class Message {
 
     public static final String[] MENU_CMDS = {"L", "R", "M"};
 
-//    public static final String FORBIDDEN_MOVE = "Oh! You cannot go further. You will hit the boundary.";
-
     public static final String ERR_MSG_FORBIDDEN_MOVE = "Oh! You cannot go further. You will hit the boundary.";
     public static final String ERR_MSG_HAS_OBSTACLE = "Oh! You cannot go further. You will hit the obstacle.";
     public static final String ERR_MSG_WRONG_INSTRUCTION = "Wrong Instruction. Please input L,R,M only.";

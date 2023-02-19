@@ -111,25 +111,22 @@ public class GuiInput extends AInput{
         arrowButton.setFocusPainted(false);
         arrowButton.setIcon(arrowIcon);
         arrowButton.addActionListener(ev -> {
-            switch (cmd) {
-                case CMD_GO_SCENES_1 -> {
-                    parseSceneSize(null);
-                    Dimension dim = sceneDimension;
-                    Instruction instruction = parseInitialPosDirection(null);
-                    Point pos = instruction.getInitialPosition();
-                    Direction dir = instruction.getDirection();
+            if (CMD_GO_SCENES_1.equals(cmd)) {
+                parseSceneSize(null);
+                Dimension dim = sceneDimension;
+                Instruction instruction = parseInitialPosDirection(null);
+                Point pos = instruction.getInitialPosition();
+                Direction dir = instruction.getDirection();
 
-                    if (dim != null && pos != null && dir != null) {
-                        sceneDimension = dim;
-                        instructionList = new ArrayList<>();
-                        instructionList.add(new Instruction(pos, dir));
-                        gui.initGameBoardComponents();
-                        gui.getGm().getScreenChanger().showScreen1();
-                    }
+                if (dim != null && pos != null && dir != null) {
+                    sceneDimension = dim;
+                    instructionList = new ArrayList<>();
+                    instructionList.add(new Instruction(pos, dir));
+                    gui.initGameBoardComponents();
+                    gui.getGm().getScreenChanger().showScreen1();
                 }
-                case CMD_GO_SCENES_0 -> gui.getGm().getScreenChanger().showScreen0();
-                default -> {
-                }
+            } else if (CMD_GO_SCENES_0.equals(cmd)) {
+                gui.getGm().getScreenChanger().showScreen0();
             }
         });
         arrowButton.setActionCommand(CMD_GO_SCENES_1);
@@ -146,8 +143,6 @@ public class GuiInput extends AInput{
                 throw new IllegalArgumentException();
             sceneDimension = new Dimension(Integer.parseInt(widthText.getText()),
                     Integer.parseInt(heightText.getText()));
-        }catch (NumberFormatException e){
-            gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE_GUI);
         }catch (IllegalArgumentException e){
             gui.getMessageText().setText(Message.ERR_MSG_INVALID_SIZE_GUI);
         }

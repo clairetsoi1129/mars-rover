@@ -18,6 +18,7 @@ public class Rover extends AVehicle{
         basket.add(sample);
     }
 
+    @Override
     public void move(int step){
         switch (direction) {
             case N -> position.translate(0, step);

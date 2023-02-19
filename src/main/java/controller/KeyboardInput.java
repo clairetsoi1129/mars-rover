@@ -9,8 +9,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class KeyboardInput extends AInput{
-//    private List<Instruction> instructionList = new ArrayList<>();
-
     public KeyboardInput() {
         super();
         Scanner scanner=new Scanner(System.in);

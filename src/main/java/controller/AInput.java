@@ -11,7 +11,7 @@ public abstract class AInput {
     protected Dimension sceneDimension;
     protected List<Instruction> instructionList;
     
-    public AInput(){
+    protected AInput(){
         instructionList = new ArrayList<>();
     }
 

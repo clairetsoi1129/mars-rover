@@ -1,6 +1,7 @@
 package util;
 
 import java.awt.*;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,8 @@ public class RandomLocationImpl implements RandomLocation{
 
     private Dimension dimension;
 
-    private List<Point> roverInitPos;
-
     public RandomLocationImpl(Dimension plateauSize, List<Point> roverInitPos) {
         this.dimension = plateauSize;
-        this.roverInitPos = roverInitPos;
         this.occupiedLocs = new ArrayList<>();
         this.generatedLocs = new ArrayList<>();
 
@@ -22,12 +20,11 @@ public class RandomLocationImpl implements RandomLocation{
     }
 
     private Point generateLocation(){
-        Point generatedPoint = new Point(getRandomNumber(0, dimension.width), getRandomNumber(0, dimension.height));
-        return generatedPoint;
+        return new Point(getRandomNumber(0, dimension.width), getRandomNumber(0, dimension.height));
     }
 
     private int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
+        return new SecureRandom().nextInt(min, max);
     }
 
     public Point getGeneratedLocation(int i) {
